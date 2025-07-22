@@ -1,0 +1,40 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}assignment-1{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+  </head>
+  <body style="background-image: url('/static/images/img-3.jpg');">
+        <div class= m-5>
+            <div class="text-center mt-5 text-pretty">
+                <h1 class="text-3xl font-semibold m-2 p-2">Category: {{category.name}}</h1>
+            </div>
+            <hr class="border-t-2 border-white" />
+            <div class="grid grid-cols-4 items-center text-xl font-bold mt-10 py-3 px-5 bg-rose-200 rounded-md shadow-md">
+                <div>Name</div>
+                <div>Description</div>
+                <div>Location</div>
+                <div>Date</div>
+            </div>
+            <hr class="border-t-2 border-blue-100" />
+            <div class="bg-rose-100 grid grid-cols-1 rounded-lg shadow-md px-3 gap-4 ">
+                {% for event in events %}
+                    <div class="grid grid-cols-4">
+                        <span>{{forloop.counter}}. {{event.name}}</span>
+                        <p>{{event.description}}</p>
+                        <p>{{event.location}}</p>
+                        <p>{{event.date}}</p>
+                    </div>
+                    <hr class="border-t-2 border-white" />
+                {% empty %}
+                <h2>No Event found in this category</h2>
+                {% endfor %}
+            </div>
+            
+        </div>
+  </body>
+</html>
