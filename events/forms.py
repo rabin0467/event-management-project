@@ -6,6 +6,7 @@ from django.forms.widgets import SelectDateWidget
 
 class StyledFormMixin:
     default_classes = "border-2 border-gray-300 w-full rounded-lg shadow-sm"
+
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
             if isinstance(field.widget, forms.Textarea):
@@ -13,10 +14,9 @@ class StyledFormMixin:
                     'class': self.default_classes ,
                     'placeholder': f"Enter { field.label.lower()}"
                 })
-            elif isinstance(field.widget, SelectDateWidget):
-                for part in ['date','month','year']:
-                    field.widget.attrs.update({
-                        'class': self.default_classes,
+            elif isinstance(field.widget, forms.SelectDateWidget):
+                field.widget.attrs.update({
+                    'class': self.default_classes,
                 })
             elif isinstance(field.widget, forms.TextInput):
                 field.widget.attrs.update({
@@ -28,6 +28,11 @@ class StyledFormMixin:
                     'type': 'time',
                     'class': self.default_classes,
                     'placeholder':'HH:MM'
+                })
+            elif isinstance(field.widget, forms.EmailInput):
+                field.widget.attrs.update({
+                    'class': self.default_classes
+
                 })
             
 
@@ -59,9 +64,19 @@ class EventModelForm(StyledFormMixin, forms.ModelForm):
 class CategoryModelForm(StyledFormMixin, forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name', 'description']
+        fields = '__all__'
 
         
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
+
+class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
+    class Meta:
+        model = Participant
+        fields= '__all__'
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

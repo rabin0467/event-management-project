@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import date, timedelta
 from django.db.models import Q, Count
 from events.models import Event, Category, Participant
-from events.forms import EventModelForm, CategoryModelForm
+from events.forms import EventModelForm, CategoryModelForm, ParticipantModelForm
 from django.contrib import messages
 
 # Create your views here.
@@ -73,6 +73,21 @@ def events_by_category(request, category_id):
     # print('events:', events)
     return render(request, 'events/events_by_category.html', {'events': events, 'category': category})
 
+def create_category(request):
+    if request.method == 'POST':
+        cat_form = CategoryModelForm(request.POST)
+        if cat_form.is_valid():
+            cat_form.save()
+            messages.success(request, 'Category created succesfully')
+        else:
+            messages.error(request, 'Something went wrong')
+    else:
+        cat_form = CategoryModelForm()
+        
+
+    return render(request, 'events/create_category.html', {'cat_form': cat_form})
+
+
 def create_event(request):
 
     if request.method == 'POST':
@@ -80,12 +95,13 @@ def create_event(request):
         
         if event_form.is_valid():
             event_form.save()
-
             messages.success(request, 'Event Created Succesfully')
-            # return redirect('event-list')
+        else:
+            messages.error(request, 'Something went wrong')
 
     else:
         event_form = EventModelForm()
+        
 
            
     context = {
@@ -93,6 +109,20 @@ def create_event(request):
     }
     
     return render(request, 'events/create_event.html', context)
+
+def add_participant(request):
+    if request.method == 'POST':
+        parti_form = ParticipantModelForm(request.POST)
+        if parti_form.is_valid():
+            parti_form.save()
+            messages.success(request, 'Participant added succesfully')
+        else:
+            messages.error(request, 'Something went wrong')
+    else:
+        parti_form = ParticipantModelForm()
+        
+
+    return render(request, 'events/add_participant.html', {'parti_form': parti_form})
 
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)
@@ -105,12 +135,13 @@ def update_event(request, event_id):
         if event_form.is_valid() and category_form.is_valid():
             category_form.save()
             event_form.save()
-
             messages.success(request, 'Event Updated Succesfully')
-            # return redirect('event-list')
+        else:
+            messages.error(request, 'Something went wrong')
     else:
         event_form = EventModelForm(instance=event)
         category_form = CategoryModelForm(instance=category)
+        
 
     context = {
         'event':event,

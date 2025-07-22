@@ -110,12 +110,15 @@
 
           
 
-    </div>
-    <div class=" mt-10 mb-6 text-center px-5 py-3">
-      <a href="{% url "create-event" %}"class="bg-rose-500 px-3 py-2 mt-5 rounded-lg text-2xl font-bold hover:text-gray-200 ">Create a new Event</a>
+    </div> 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
+                <a href="{% url "create-category" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Create a new Category</a>
 
-    </div>
-
+                <a href="{% url "create-event" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Create a new Event</a>
+                
+                <a href="{% url "add-participant" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Add new Participant</a>
+                
+            </div>
   </body>
 </html>
 {% endblock event %}
