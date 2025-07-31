@@ -21,12 +21,12 @@
         <div class="underline">Events</div>
     </div> 
     <hr class="border-t-2 border-blue-100">
-    {% for participant in participants %}
+    {% for user in users %}
         <div class="grid grid-cols-3 px-3 py-2 bg-rose-200 rounded-lg shadow-md">
-            <span>{{forloop.counter}}.  {{participant.name}}</span>
-            <div>{{participant.email}}</div>
+            <span>{{forloop.counter}}.  {{user.username}}</span>
+            <div>{{user.email}}</div>
             <div>
-                {% for event in participant.events.all %}
+                {% for event in user.rsve_events.all %}
                     <li><span>{{event.name}}</span><br></li>
                 {% empty %}
                     <span>No Event</span>

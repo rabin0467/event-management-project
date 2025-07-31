@@ -1,10 +1,14 @@
 from django import forms
-from events.models import Event, Participant, Category
+from events.models import Event, Category
 from datetime import date
 from django.forms.widgets import SelectDateWidget
 
 
 class StyledFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_styled_widgets()
+
     default_classes = "border-2 border-gray-300 w-full rounded-lg shadow-sm"
 
     def apply_styled_widgets(self):
@@ -32,7 +36,6 @@ class StyledFormMixin:
             elif isinstance(field.widget, forms.EmailInput):
                 field.widget.attrs.update({
                     'class': self.default_classes
-
                 })
             
 
@@ -68,16 +71,6 @@ class CategoryModelForm(StyledFormMixin, forms.ModelForm):
 
         
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()
-
-class ParticipantModelForm(StyledFormMixin, forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields= '__all__'
 
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.apply_styled_widgets()
+

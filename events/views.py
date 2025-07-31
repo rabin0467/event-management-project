@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from datetime import date, timedelta
 from django.db.models import Q, Count
-from events.models import Event, Category, Participant
-from events.forms import EventModelForm, CategoryModelForm, ParticipantModelForm
+from events.models import Event, Category
+from events.forms import EventModelForm, CategoryModelForm
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -55,10 +56,9 @@ def event_list(request):
     return render(request, "events/event_list.html", context)
 
 def participants_list(request):
-    participants = Participant.objects.all().prefetch_related('events')
-    
+    users = User.objects.all()
+    return render(request, 'events/participants.html', {'users': users})
 
-    return render(request, 'events/participants.html', {'participants': participants})
 
 def event_details(request, event_id):
     event = Event.objects.prefetch_related('participants').get(id=event_id)
@@ -110,19 +110,7 @@ def create_event(request):
     
     return render(request, 'events/create_event.html', context)
 
-def add_participant(request):
-    if request.method == 'POST':
-        parti_form = ParticipantModelForm(request.POST)
-        if parti_form.is_valid():
-            parti_form.save()
-            messages.success(request, 'Participant added succesfully')
-        else:
-            messages.error(request, 'Something went wrong')
-    else:
-        parti_form = ParticipantModelForm()
-        
 
-    return render(request, 'events/add_participant.html', {'parti_form': parti_form})
 
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)

@@ -52,13 +52,13 @@
             <h2 class="text-center">{{counts.completed_event}}</h2>
         </div>
       </a>
-            <a href="{% url 'participants-list' %}" class="hover:bg-white hover:scale-110 hover:rounded-sm transition ">
+          <a href="{% url 'participants-list' %}" class="hover:bg-white hover:scale-110 hover:rounded-sm transition ">
             <div class="bg-50 p-6 shadow-lg rounded-lg transition">
-            <h1 class="text-pretty ">Total Participants</h1>
-            <hr class="my-2 border-t-2 border-white" />
-            <h2 class="text-center">{{counts.total_participants}}</h2>
-      </div>
-      </a>
+              <h1 class="text-pretty ">Total Participants</h1>
+              <hr class="my-2 border-t-2 border-white" />
+              <h2 class="text-center">{{counts.total_participant}}</h2>
+            </div>
+          </a>
     </div>
 
     {% comment %} Today's Event {% endcomment %}
@@ -96,7 +96,7 @@
                     <span>{{ event.time }}</span>
                     <span>{{event.category}}</span>
                     <a href="{% url 'event-details' event.id %}">
-                        <button class=" py-1 px-2 rounded-sm  hover:text-blue-500 hover:underline hover:scale-110">Details</button> 
+                        <button class=" py-1 px-2 rounded-sm  hover:text-blue-500 hover:underline hover:scale-110">RSVP</button> 
                     </a>
                 </div>
                 <hr class="border-t-2 bg-blue-100">
@@ -116,7 +116,9 @@
 
                 <a href="{% url "create-event" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Create a new Event</a>
                 
-                <a href="{% url "add-participant" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Add new Participant</a>
+              {% comment %}
+                  <a href="{% url "add-participant" %}"class="bg-rose-500 px-2 py-2 m-5 rounded-lg text-center text-2xl font-bold hover:text-gray-200 ">Add new Participant</a>
+              {% endcomment %}  
                 
             </div>
   </body>
