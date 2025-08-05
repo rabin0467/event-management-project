@@ -1,18 +1,9 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}assignment-1{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
-
-</head>
+{% extends "base.html" %}
+{% block content %}
+  
 <body class="m-5 p-5 bg-blue-100">
     <div class=" text-center">
-        <h1 class="text-3xl font-semibold" >Total Participants</h1>
+        <h1 class="text-3xl font-semibold" >Total RSVP Participants</h1>
     </div>
     <hr class="border-t-2 border-white">
     <div class="grid grid-cols-3 items-center text-xl font-bold mt-10 py-3 px-5 bg-rose-200 rounded-md shadow-md">
@@ -26,7 +17,7 @@
             <span>{{forloop.counter}}.  {{user.username}}</span>
             <div>{{user.email}}</div>
             <div>
-                {% for event in user.rsve_events.all %}
+                {% for event in user.rsvp_events.all %}
                     <li><span>{{event.name}}</span><br></li>
                 {% empty %}
                     <span>No Event</span>
@@ -36,7 +27,7 @@
         </div>
         <hr class="border-t-2 border-blue-100">
             {% empty %}
-                <div>No Participant Found</div>
+                <div>No RSVP Participant Found</div>
     {% endfor %}
 </body>
-</html>
+{% endblock content %}

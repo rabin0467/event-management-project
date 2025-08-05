@@ -19,12 +19,12 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['event-management-project-1-vcjr.onrender.com']
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-# ALLOWED_HOSTS = [
-#     'event-management-project-1-vcjr.onrender.com',
-#     'localhost',
-#     '127.0.0.1'
-# ]
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    'event-management-project-1-vcjr.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 CSRF_TRUSTED_ORIGINS = [
     'https://event-management-project-1-vcjr.onrender.com'
 
@@ -142,6 +142,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[
     BASE_DIR / 'static'
 ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

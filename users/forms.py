@@ -60,4 +60,20 @@ class CustomRegistraionForm(forms.ModelForm):
 class LoginForm(StyledFormMixin, AuthenticationForm):
     def __init__(self, request = ..., *args, **kwargs):
         super().__init__(request, *args, **kwargs)
+
+class AssignRoleForm(StyledFormMixin, forms.Form):
+    role = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        empty_label='Select a Role'
+    )
     
+class CreateGroupForm(StyledFormMixin, forms.ModelForm):
+    permission = forms.ModelMultipleChoiceField(
+        queryset= Permission.objects.all(),
+        widget = forms.CheckboxSelectMultiple(),
+        required = False,
+        label = 'Assign Permission'
+    )
+    class Meta:
+        model = Group
+        fields = ['name', 'permission']

@@ -9,7 +9,7 @@ class StyledFormMixin:
         super().__init__(*args, **kwargs)
         self.apply_styled_widgets()
 
-    default_classes = "border-2 border-gray-300 w-full rounded-lg shadow-sm"
+    default_classes = "border-2 bg-gray-300 w-full rounded shadow-sm"
 
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
