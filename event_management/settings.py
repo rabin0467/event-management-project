@@ -21,12 +21,12 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 ALLOWED_HOSTS = [
-    'event-management-project-1-vcjr.onrender.com',
+    'https://event-management-project-h2lp.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'https://event-management-project-1-vcjr.onrender.com'
+    'https://event-management-project-h2lp.onrender.com'
 
 ]
 
